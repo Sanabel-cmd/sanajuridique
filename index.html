@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'Édition Juridique par Sana.M</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy-blue: #0A1931;
+            --light-bg: #F9F9F7;
+            --border-color: #D1D1D1;
+            --warning-yellow: #F5B041;
+            --success-green: #16a34a;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light-bg);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        h1, h2, h3 { font-family: 'Merriweather', serif; color: var(--navy-blue); }
+        
+        .warning-banner {
+            background-color: var(--warning-yellow);
+            color: #000;
+            text-align: center;
+            padding: 12px 20px;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        header {
+            text-align: center;
+            padding: 50px 20px;
+            border-bottom: 5px solid var(--navy-blue);
+            margin-bottom: 40px;
+            background-color: #fff;
+            position: relative;
+        }
+        header h1 { font-size: 3.5rem; margin: 0; text-transform: uppercase; letter-spacing: 2px; cursor: pointer;}
+        .author { font-style: italic; color: #555; margin-top: 10px; font-size: 1.1rem; }
+        .update-badge {
+            display: inline-block;
+            background-color: #e8f0fe;
+            color: var(--navy-blue);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        /* Navigation entre les pages */
+        .page-section { display: none; }
+        .page-section.active { display: block; }
+
+        .container {
+            max-width: 1500px;
+            width: 95%;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 2fr 1.2fr;
+            gap: 50px;
+        }
+
+        .section-title {
+            border-bottom: 3px solid var(--navy-blue);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+        }
+        
+        .card {
+            background: #fff;
+            padding: 25px;
+            border: 1px solid var(--border-color);
+            box-shadow: 4px 4px 0px rgba(10, 25, 49, 0.08);
+            margin-bottom: 25px;
+        }
+
+        .date-tag {
+            display: inline-block;
+            background-color: var(--navy-blue);
+            color: white;
+            padding: 4px 10px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-radius: 2px;
+        }
+
+        .btn-link {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--navy-blue);
+            border: 2px solid var(--navy-blue);
+            padding: 10px 20px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .btn-link:hover { background-color: var(--navy-blue); color: white; }
+
+        /* Formulaire */
+        label { font-weight: 600; display: block; margin-top: 15px; margin-bottom: 5px; }
+        input, select, button { width: 100%; padding: 12px; box-sizing: border-box; border: 1px solid var(--border-color); font-family: 'Inter', sans-serif; font-size: 1rem; }
+        button.btn-primary { background-color: var(--navy-blue); color: white; font-weight: bold; cursor: pointer; border: none; margin-top: 20px; transition: 0.3s; }
+        button.btn-primary:hover { background-color: #152d54; }
+        
+        #result-calc { padding: 20px; background-color: #e8f0fe; border-left: 5px solid var(--navy-blue); display: none; margin-top: 20px; }
+
+        /* Quiz */
+        .quiz-section { grid-column: 1 / -1; margin-top: 20px; margin-bottom: 60px; }
+        .quiz-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; }
+        .quiz-answer { display: none; padding: 15px; background-color: #f0fdf4; border-left: 4px solid var(--success-green); margin-top: 15px; font-size: 0.95rem; }
+
+        /* Page Actualités Complète */
+        #news-page .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 30px; }
+
+        @media (max-width: 1024px) {
+            .container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="warning-banner">
+        ⚠️ Projet étudiant (Sana.M) - But éducatif. Les calculs sont des estimations simplifiées (Bourses, AAH, RSA).
+    </div>
+
+    <header>
+        <h1 onclick="showPage('home')">L'Édition Juridique</h1>
+        <div class="author">Veille juridique et simulateur de droits • Dirigé par <strong>Sana.M</strong></div>
+        <div class="update-badge">Dernière mise à jour hebdomadaire : 31 Mars 2026</div>
+    </header>
+
+    <!-- ================= PAGE D'ACCUEIL ================= -->
+    <div id="home" class="page-section active container">
+        
+        <!-- Colonne Gauche : À la Une -->
+        <main>
+            <h2 class="section-title">📰 À la Une cette semaine</h2>
+            <div id="featured-news" class="card">
+                <!-- L'actualité principale sera injectée ici par JS -->
+            </div>
+            <button class="btn-link" onclick="showPage('news-page')">Voir les 15 actualités récentes ➔</button>
+        </main>
+
+        <!-- Colonne Droite : Calculateur -->
+        <aside>
+            <h2 class="section-title">🧮 Calculateur Universel</h2>
+            <div class="card">
+                <p>Estimez vos aides (Bourse CROUS, RSA, Prime d'activité, AAH).</p>
+                
+                <label for="age">Votre âge :</label>
+                <input type="number" id="age" placeholder="Ex: 20" min="16">
+
+                <label for="statut">Êtes-vous étudiant(e) ?</label>
+                <select id="statut">
+                    <option value="non">Non</option>
+                    <option value="oui">Oui (Inscrit dans le supérieur)</option>
+                </select>
+
+                <label for="revenus">Revenus nets mensuels du foyer (€) :</label>
+                <input type="number" id="revenus" placeholder="Ex: 0" min="0">
+
+                <label for="handicap">Situation de handicap reconnue ?</label>
+                <select id="handicap">
+                    <option value="aucun">Aucun (Non concerné)</option>
+                    <option value="oui_leger">Oui (Taux entre 50% et 79%)</option>
+                    <option value="oui_lourd">Oui (Taux de 80% ou plus)</option>
+                </select>
+
+                <button class="btn-primary" onclick="calculerAides()">Lancer l'estimation</button>
+
+                <div id="result-calc"></div>
+            </div>
+        </aside>
+
+        <!-- Bas de page : Quiz Dynamique -->
+        <section class="quiz-section">
+            <h2 class="section-title">🎯 Quiz Juridique (Tirage aléatoire sur 100 questions)</h2>
+            <div id="quiz-container" class="quiz-grid">
+                <!-- Les questions seront injectées ici par JS -->
+            </div>
+            <button class="btn-link" style="margin-top: 20px;" onclick="chargerQuiz()">Générer de nouvelles questions 🔄</button>
+        </section>
+    </div>
+
+    <!-- ================= PAGE ACTUALITÉS (15 News) ================= -->
+    <div id="news-page" class="page-section container" style="display: block; grid-template-columns: 1fr;">
+        <button class="btn-link" style="width: auto; margin-bottom: 20px;" onclick="showPage('home')">⬅ Retour à l'accueil</button>
+        <h2 class="section-title">📰 Fil d'Actualité Juridique et Social (Mars 2026)</h2>
+        <div id="all-news-container" class="news-grid">
+            <!-- Les 15 actualités seront injectées ici -->
+        </div>
+    </div>
+
+    <script>
+        // ================= 1. BASE DE DONNÉES ACTUALITÉS (15 News) =================
+        const newsData = [
+            { date: "31/03/2026", tag: "Droit Étudiant", title: "Réforme des Bourses CROUS : Nouveaux échelons", content: "La réforme tant attendue entre en vigueur. Les plafonds de ressources pour accéder à l'échelon 1 ont été rehaussés de 6%, permettant à 50 000 étudiants supplémentaires de devenir boursiers." },
+            { date: "28/03/2026", tag: "Droit du Travail", title: "Semaine de 4 jours : Le bilan après 1 an", content: "L'expérimentation de la semaine de 4 jours (en 32h ou 35h) dans la fonction publique montre une baisse de 15% de l'absentéisme. Le gouvernement envisage une loi d'incitation pour le privé." },
+            { date: "24/03/2026", tag: "Handicap", title: "La RQTH attribuée à vie par défaut", content: "Pour les handicaps irréversibles, le renouvellement de la Reconnaissance de la Qualité de Travailleur Handicapé n'est plus nécessaire. Une avancée majeure contre la lourdeur administrative." },
+            { date: "20/03/2026", tag: "Logement", title: "Encadrement des loyers étendu", content: "12 nouvelles métropoles adoptent l'encadrement des loyers ce mois-ci. Les locataires peuvent désormais exiger un remboursement rétroactif en cas de dépassement abusif." },
+            { date: "17/03/2026", tag: "Numérique", title: "IA Act : Premières sanctions européennes", content: "Le règlement européen sur l'Intelligence Artificielle fait ses premières victimes : une entreprise a été sanctionnée pour avoir utilisé un algorithme de recrutement discriminatoire." },
+            { date: "14/03/2026", tag: "Droit de la Famille", title: "Le Congé de Naissance remplace le Congé Parental", content: "Mieux rémunéré (jusqu'à 1900€/mois) mais plus court (6 mois), ce nouveau congé vise à inciter les pères à s'impliquer davantage dès la naissance." },
+            { date: "10/03/2026", tag: "Social", title: "RSA : Les 15h d'activité généralisées", content: "Depuis le 1er mars, tous les départements appliquent la condition des 15h d'activité d'insertion pour le versement du RSA, suscitant des débats juridiques sur la notion de 'travail gratuit'." },
+            { date: "07/03/2026", tag: "Consommation", title: "Fin des frais de résiliation anticipée", content: "Une nouvelle directive interdit aux opérateurs téléphoniques et fournisseurs d'énergie de facturer des frais si le client déménage ou change de situation financière." },
+            { date: "03/03/2026", tag: "Santé", title: "Remboursement des psychologues", content: "Le dispositif 'MonSoutienPsy' évolue : l'accès direct sans passer par un médecin généraliste est désormais inscrit dans la loi de financement de la sécurité sociale." },
+            { date: "28/02/2026", tag: "Droit Pénal", title: "Cyberharcèlement : Peines durcies", content: "La nouvelle loi 'Internet Sûr' qualifie désormais les raids numériques de circonstance aggravante systématique, avec des peines allant jusqu'à 5 ans de prison." },
+            { date: "24/02/2026", tag: "Environnement", title: "Délit d'écocide : Première jurisprudence", content: "Une multinationale a été condamnée sur le fondement de la loi Climat pour pollution aggravée des sols, créant un précédent juridique historique en France." },
+            { date: "20/02/2026", tag: "Handicap", title: "Accessibilité des sites web publics", content: "L'État impose des amendes automatiques aux mairies dont les sites internet ne sont pas 100% accessibles aux personnes malvoyantes." },
+            { date: "15/02/2026", tag: "Travail", title: "Droit à la déconnexion renforcé", content: "Les entreprises de plus de 50 salariés doivent désormais bloquer techniquement l'accès aux serveurs d'emails le week-end, sauf dérogation." },
+            { date: "10/02/2026", tag: "Étudiants", title: "Repas à 1€ : Pérennisation votée", content: "Le tarif solidaire dans les restaurants universitaires (CROUS) pour les étudiants boursiers et précaires est définitivement inscrit dans le Code de l'éducation." },
+            { date: "05/02/2026", tag: "Justice", title: "Plaintes en ligne généralisées", content: "Il est désormais possible de déposer plainte entièrement en ligne via France Identité pour les atteintes aux biens (vols, dégradations)." }
+        ];
+
+        // ================= 2. BASE DE DONNÉES QUIZ (Modèle pour 100 questions) =================
+        const quizData = [
+            { q: "Logement : Mon propriétaire a 3 mois pour me rendre ma caution.", a: "Faux. Le délai est de 1 mois si l'état des lieux est conforme, 2 mois sinon.", source: "Loi du 6 juillet 1989" },
+            { q: "Travail : J'ai le droit d'ignorer les emails de mon patron le dimanche.", a: "Vrai. C'est le droit à la déconnexion.", source: "Art. L2242-17 du Code du travail" },
+            { q: "Handicap : Les entreprises n'ont aucune obligation d'embauche.", a: "Faux. Obligation de 6% de travailleurs handicapés pour les entreprises de 20+ salariés.", source: "Art. L5212-2 du Code du travail" },
+            { q: "Consommation : J'ai 7 jours pour changer d'avis sur un achat en ligne.", a: "Faux. Le délai de rétractation est de 14 jours.", source: "Art. L221-18 du Code de la consommation" },
+            { q: "Étudiant : Un stage de 2 mois doit obligatoirement être rémunéré.", a: "Faux. La gratification est obligatoire à partir de la 305ème heure (soit plus de 2 mois).", source: "Art. L124-6 du Code de l'éducation" },
+            { q: "Famille : Le PACS donne les mêmes droits de succession que le mariage.", a: "Faux. Sans testament, le partenaire de PACS n'est pas l'héritier légal.", source: "Code civil" },
+            { q: "Travail : Un CDD peut être renouvelé indéfiniment.", a: "Faux. Il ne peut être renouvelé que 2 fois maximum en règle générale.", source: "Art. L1242-8 du Code du travail" },
+            { q: "Santé : Le secret médical s'applique même après le décès du patient.", a: "Vrai. Sauf exceptions très précises (connaître les causes de la mort, défendre la mémoire).", source: "Art. L1110-4 du Code de la santé publique" },
+            { q: "Justice : Un avocat est obligatoire pour divorcer par consentement mutuel.", a: "Vrai. Chaque époux doit même avoir son propre avocat.", source: "Art. 229-1 du Code civil" },
+            { q: "Numérique : J'ai le droit de demander à Google de supprimer un article sur moi.", a: "Vrai. C'est le 'droit à l'oubli' ou droit au déréférencement.", source: "RGPD" },
+            { q: "Handicap : L'AAH est supprimée si je me marie avec quelqu'un qui travaille.", a: "Faux. Depuis le 1er octobre 2023, l'AAH est déconjugalisée.", source: "Loi du 16 août 2022" },
+            { q: "Logement : Le propriétaire peut entrer chez moi s'il a gardé un double des clés.", a: "Faux. C'est une violation de domicile, punie par la loi.", source: "Art. 226-4 du Code pénal" }
+            // Ajoutez vos autres questions ici jusqu'à 100 suivant ce modèle :
+            // { q: "Votre question", a: "Votre réponse", source: "La loi" },
+        ];
+
+        // ================= 3. LOGIQUE D'AFFICHAGE (Navigation et Injection) =================
+        function showPage(pageId) {
+            document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0); // Remonte en haut de la page
+        }
+
+        function initNews() {
+            // Affiche la 1ère news sur l'accueil
+            const featured = newsData[0];
+            document.getElementById('featured-news').innerHTML = `
+                <span class="date-tag">${featured.date} • ${featured.tag}</span>
+                <h3>${featured.title}</h3>
+                <p>${featured.content}</p>
+            `;
+
+            // Affiche les 15 news sur la page dédiée
+            const allNewsHtml = newsData.map(news => `
+                <div class="card">
+                    <span class="date-tag">${news.date} • ${news.tag}</span>
+                    <h3>${news.title}</h3>
+                    <p>${news.content}</p>
+                </div>
+            `).join('');
+            document.getElementById('all-news-container').innerHTML = allNewsHtml;
+        }
+
+        function chargerQuiz() {
+            // Mélange le tableau et prend 6 questions au hasard
+            const shuffled = [...quizData].sort(() => 0.5 - Math.random());
+            const selected = shuffled.slice(0, 6);
+            
+            const quizHtml = selected.map((item, index) => `
+                <div class="card">
+                    <h3>${item.q}</h3>
+                    <button class="btn-link" onclick="toggleReponse('q-dyn-${index}')">Vérifier la loi</button>
+                    <div id="q-dyn-${index}" class="quiz-answer">
+                        ${item.a}<br><em>Source : ${item.source}</em>
+                    </div>
+                </div>
+            `).join('');
+            document.getElementById('quiz-container').innerHTML = quizHtml;
+        }
+
+        function toggleReponse(id) {
+            const rep = document.getElementById(id);
+            rep.style.display = rep.style.display === "block" ? "none" : "block";
+        }
+
+        // ================= 4. CALCULATEUR AVEC BOURSE ET HANDICAP OPTIONNEL =================
+        function calculerAides() {
+            const age = parseInt(document.getElementById('age').value);
+            const statut = document.getElementById('statut').value;
+            const revenus = parseInt(document.getElementById('revenus').value) || 0;
+            const handicap = document.getElementById('handicap').value;
+            const resultDiv = document.getElementById('result-calc');
+            
+            if (!age) {
+                resultDiv.innerHTML = "⚠️ Veuillez entrer votre âge.";
+                resultDiv.style.display = "block";
+                return;
+            }
+
+            let aides = [];
+
+            // Logique Étudiant (Bourse)
+            if (statut === "oui") {
+                if (revenus < 35000 / 12) { // Estimation simplifiée du plafond CROUS
+                    aides.push("🎓 <strong>Bourse CROUS :</strong> Au vu des revenus déclarés, vous êtes probablement éligible à une bourse sur critères sociaux (Échelons 0bis à 7). Pensez à faire votre DSE (Dossier Social Étudiant).");
+                    aides.push("🍽️ <strong>Avantage Étudiant :</strong> Vous avez droit aux repas à 1€ au resto U si vous êtes boursier.");
+                } else {
+                    aides.push("🎓 <strong>Bourse CROUS :</strong> Les revenus de votre foyer semblent dépasser les plafonds. Cependant, vous gardez accès aux aides au logement (APL).");
+                }
+            }
+
+            // Logique Handicap (Optionnelle)
+            if (handicap !== "aucun") {
+                if (handicap === "oui_lourd" && age >= 20) {
+                    aides.push("✅ <strong>AAH (Handicap) :</strong> Éligible à taux plein ou partiel (environ 1016€/mois en 2026).");
+                } else if (handicap === "oui_leger" && age >= 20) {
+                    aides.push("ℹ️ <strong>AAH (Handicap) :</strong> Possible uniquement si la MDPH reconnaît une restriction substantielle d'accès à l'emploi (RSDAE).");
+                }
+            }
+
+            // Logique Aides Générales (RSA / Prime d'activité) - Ne s'applique pas aux étudiants classiques sans revenus
+            if (statut === "non") {
+                if (age >= 25 || (age >= 18 && revenus > 0)) {
+                    if (revenus === 0 && age >= 25) {
+                        aides.push("✅ <strong>RSA :</strong> Éligible. Attention : 15h d'activité d'insertion requises depuis la réforme.");
+                    } else if (revenus > 0 && revenus < 1900) {
+                        aides.push("✅ <strong>Prime d'activité :</strong> Vous y êtes probablement éligible pour compléter votre salaire.");
+                    }
+                } else if (age < 25 && revenus === 0) {
+                    aides.push("ℹ️ <strong>Moins de 25 ans :</strong> RSA inaccessible sauf si vous êtes parent isolé.");
+                }
+            }
+
+            // Logique Logement
+            if (revenus < 1500 && statut === "non") {
+                aides.push("🏠 <strong>APL :</strong> Vous êtes dans la tranche de revenus éligible.");
+            } else if (statut === "oui") {
+                aides.push("🏠 <strong>APL Étudiant :</strong> En tant qu'étudiant, vous êtes éligible aux APL indépendamment des revenus de vos parents.");
+            }
+
+            // Affichage
+            if (aides.length === 0) {
+                resultDiv.innerHTML = "Vos revenus actuels dépassent les plafonds des aides sociales classiques.";
+            } else {
+                resultDiv.innerHTML = "<strong>Résultats de l'estimation :</strong><br><br>" + aides.join("<br><br>");
+            }
+            
+            resultDiv.style.display = "block";
+        }
+
+        // Initialisation au chargement de la page
+        window.onload = function() {
+            initNews();
+            chargerQuiz();
+            // Cache la page des news au démarrage
+            document.getElementById('news-page').classList.remove('active');
+        };
+    </script>
+</body>
+</html>
