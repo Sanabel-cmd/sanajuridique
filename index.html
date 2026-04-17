@@ -1,3 +1,8 @@
+C'est très clair ! Je comprends le problème : dans la version précédente, le quiz disparaissait quand on cliquait sur les actualités. Vous voulez que le quiz reste toujours visible tout en bas du site, juste après la liste des actualités.
+Voici le code corrigé. J'ai simplement "sorti" la section du quiz de la page d'accueil pour la placer à la fin du site. Ainsi, le fil d'actualité s'affichera bien avant le quiz.
+
+💻 Code Complet Corrigé (Prêt à copier-coller)
+Copiez l'intégralité de ce code et remplacez votre fichier actuel. Tout fonctionnera exactement comme vous le souhaitez.
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -120,7 +125,7 @@
         #result-calc { padding: 20px; background-color: #e8f0fe; border-left: 5px solid var(--navy-blue); display: none; margin-top: 20px; }
 
         /* Quiz */
-        .quiz-section { grid-column: 1 / -1; margin-top: 20px; margin-bottom: 60px; }
+        .quiz-section { margin-top: 20px; margin-bottom: 60px; }
         .quiz-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; }
         .quiz-answer { display: none; padding: 15px; background-color: #f0fdf4; border-left: 4px solid var(--success-green); margin-top: 15px; font-size: 0.95rem; }
 
@@ -186,8 +191,19 @@
                 <div id="result-calc"></div>
             </div>
         </aside>
+    </div>
 
-        <!-- Bas de page : Quiz Dynamique -->
+    <!-- ================= PAGE ACTUALITÉS (15 News) ================= -->
+    <div id="news-page" class="page-section container" style="grid-template-columns: 1fr;">
+        <button class="btn-link" style="width: auto; margin-bottom: 20px;" onclick="showPage('home')">⬅ Retour à l'accueil</button>
+        <h2 class="section-title">📰 Fil d'Actualité Juridique et Social (Avril 2026)</h2>
+        <div id="all-news-container" class="news-grid">
+            <!-- Les 15 actualités seront injectées ici -->
+        </div>
+    </div>
+
+    <!-- ================= SECTION QUIZ (Toujours visible en bas) ================= -->
+    <div class="container" style="display: block; margin-top: 40px;">
         <section class="quiz-section">
             <h2 class="section-title">🎯 Quiz Juridique (Tirage aléatoire)</h2>
             <div id="quiz-container" class="quiz-grid">
@@ -195,16 +211,6 @@
             </div>
             <button class="btn-link" style="margin-top: 20px;" onclick="chargerQuiz()">Générer de nouvelles questions 🔄</button>
         </section>
-    </div>
-
-    <!-- ================= PAGE ACTUALITÉS (15 News) ================= -->
-    <!-- CORRECTION ICI : Suppression du "display: block;" en ligne qui bloquait l'affichage -->
-    <div id="news-page" class="page-section container" style="grid-template-columns: 1fr;">
-        <button class="btn-link" style="width: auto; margin-bottom: 20px;" onclick="showPage('home')">⬅ Retour à l'accueil</button>
-        <h2 class="section-title">📰 Fil d'Actualité Juridique et Social (Avril 2026)</h2>
-        <div id="all-news-container" class="news-grid">
-            <!-- Les 15 actualités seront injectées ici -->
-        </div>
     </div>
 
     <script>
@@ -245,7 +251,7 @@
 
         // ================= 3. LOGIQUE D'AFFICHAGE (Navigation et Injection) =================
         function showPage(pageId) {
-            // Cache toutes les sections
+            // Cache toutes les sections de pages
             document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
             // Affiche la section demandée
             document.getElementById(pageId).classList.add('active');
