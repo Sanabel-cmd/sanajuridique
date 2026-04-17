@@ -141,7 +141,7 @@
     <header>
         <h1 onclick="showPage('home')">L'Édition Juridique</h1>
         <div class="author">Veille juridique et simulateur de droits • Dirigé par <strong>Sana.M</strong></div>
-        <div class="update-badge">Dernière mise à jour hebdomadaire : 31 Mars 2026</div>
+        <div class="update-badge">Dernière mise à jour hebdomadaire : 17 Avril 2026</div>
     </header>
 
     <!-- ================= PAGE D'ACCUEIL ================= -->
@@ -200,7 +200,7 @@
     <!-- ================= PAGE ACTUALITÉS (15 News) ================= -->
     <div id="news-page" class="page-section container" style="display: block; grid-template-columns: 1fr;">
         <button class="btn-link" style="width: auto; margin-bottom: 20px;" onclick="showPage('home')">⬅ Retour à l'accueil</button>
-        <h2 class="section-title">📰 Fil d'Actualité Juridique et Social (Mars 2026)</h2>
+        <h2 class="section-title">📰 Fil d'Actualité Juridique et Social (Avril 2026)</h2>
         <div id="all-news-container" class="news-grid">
             <!-- Les 15 actualités seront injectées ici -->
         </div>
@@ -209,6 +209,11 @@
     <script>
         // ================= 1. BASE DE DONNÉES ACTUALITÉS (15 News) =================
         const newsData = [
+            { date: "16/04/2026", tag: "Droit du Travail", title: "Congé menstruel institutionnalisé", content: "Le congé menstruel de 2 jours par mois est officiellement inscrit dans le Code du travail pour les entreprises de plus de 50 salariés, sur simple présentation d'un certificat médical annuel." },
+            { date: "14/04/2026", tag: "Numérique", title: "Majorité numérique stricte à 15 ans", content: "L'accès aux réseaux sociaux est désormais techniquement bloqué aux moins de 15 ans sans accord parental certifié via l'application France Identité." },
+            { date: "10/04/2026", tag: "Logement", title: "Passoires thermiques : Sanctions renforcées", content: "L'interdiction de louer des logements classés G est désormais assortie d'amendes automatiques pour les bailleurs, avec possibilité pour le locataire de consigner son loyer." },
+            { date: "07/04/2026", tag: "Famille", title: "Pensions alimentaires : Gestion 100% CAF", content: "L'Agence de recouvrement et d'intermédiation des pensions alimentaires (ARIPA) gère désormais par défaut la totalité des versements dès le prononcé du divorce, annulant le risque d'impayés." },
+            { date: "04/04/2026", tag: "Consommation", title: "L'Indice de Durabilité remplace la Réparabilité", content: "Tous les appareils électroniques et électroménagers doivent désormais afficher un indice de durabilité sur 10, incluant la robustesse et la disponibilité des pièces sur 10 ans." },
             { date: "31/03/2026", tag: "Droit Étudiant", title: "Réforme des Bourses CROUS : Nouveaux échelons", content: "La réforme tant attendue entre en vigueur. Les plafonds de ressources pour accéder à l'échelon 1 ont été rehaussés de 6%, permettant à 50 000 étudiants supplémentaires de devenir boursiers." },
             { date: "28/03/2026", tag: "Droit du Travail", title: "Semaine de 4 jours : Le bilan après 1 an", content: "L'expérimentation de la semaine de 4 jours (en 32h ou 35h) dans la fonction publique montre une baisse de 15% de l'absentéisme. Le gouvernement envisage une loi d'incitation pour le privé." },
             { date: "24/03/2026", tag: "Handicap", title: "La RQTH attribuée à vie par défaut", content: "Pour les handicaps irréversibles, le renouvellement de la Reconnaissance de la Qualité de Travailleur Handicapé n'est plus nécessaire. Une avancée majeure contre la lourdeur administrative." },
@@ -218,12 +223,7 @@
             { date: "10/03/2026", tag: "Social", title: "RSA : Les 15h d'activité généralisées", content: "Depuis le 1er mars, tous les départements appliquent la condition des 15h d'activité d'insertion pour le versement du RSA, suscitant des débats juridiques sur la notion de 'travail gratuit'." },
             { date: "07/03/2026", tag: "Consommation", title: "Fin des frais de résiliation anticipée", content: "Une nouvelle directive interdit aux opérateurs téléphoniques et fournisseurs d'énergie de facturer des frais si le client déménage ou change de situation financière." },
             { date: "03/03/2026", tag: "Santé", title: "Remboursement des psychologues", content: "Le dispositif 'MonSoutienPsy' évolue : l'accès direct sans passer par un médecin généraliste est désormais inscrit dans la loi de financement de la sécurité sociale." },
-            { date: "28/02/2026", tag: "Droit Pénal", title: "Cyberharcèlement : Peines durcies", content: "La nouvelle loi 'Internet Sûr' qualifie désormais les raids numériques de circonstance aggravante systématique, avec des peines allant jusqu'à 5 ans de prison." },
-            { date: "24/02/2026", tag: "Environnement", title: "Délit d'écocide : Première jurisprudence", content: "Une multinationale a été condamnée sur le fondement de la loi Climat pour pollution aggravée des sols, créant un précédent juridique historique en France." },
-            { date: "20/02/2026", tag: "Handicap", title: "Accessibilité des sites web publics", content: "L'État impose des amendes automatiques aux mairies dont les sites internet ne sont pas 100% accessibles aux personnes malvoyantes." },
-            { date: "15/02/2026", tag: "Travail", title: "Droit à la déconnexion renforcé", content: "Les entreprises de plus de 50 salariés doivent désormais bloquer techniquement l'accès aux serveurs d'emails le week-end, sauf dérogation." },
-            { date: "10/02/2026", tag: "Étudiants", title: "Repas à 1€ : Pérennisation votée", content: "Le tarif solidaire dans les restaurants universitaires (CROUS) pour les étudiants boursiers et précaires est définitivement inscrit dans le Code de l'éducation." },
-            { date: "05/02/2026", tag: "Justice", title: "Plaintes en ligne généralisées", content: "Il est désormais possible de déposer plainte entièrement en ligne via France Identité pour les atteintes aux biens (vols, dégradations)." }
+            { date: "28/02/2026", tag: "Droit Pénal", title: "Cyberharcèlement : Peines durcies", content: "La nouvelle loi 'Internet Sûr' qualifie désormais les raids numériques de circonstance aggravante systématique, avec des peines allant jusqu'à 5 ans de prison." }
         ];
 
         // ================= 2. BASE DE DONNÉES QUIZ (Modèle pour 100 questions) =================
@@ -240,8 +240,6 @@
             { q: "Numérique : J'ai le droit de demander à Google de supprimer un article sur moi.", a: "Vrai. C'est le 'droit à l'oubli' ou droit au déréférencement.", source: "RGPD" },
             { q: "Handicap : L'AAH est supprimée si je me marie avec quelqu'un qui travaille.", a: "Faux. Depuis le 1er octobre 2023, l'AAH est déconjugalisée.", source: "Loi du 16 août 2022" },
             { q: "Logement : Le propriétaire peut entrer chez moi s'il a gardé un double des clés.", a: "Faux. C'est une violation de domicile, punie par la loi.", source: "Art. 226-4 du Code pénal" }
-            // Ajoutez vos autres questions ici jusqu'à 100 suivant ce modèle :
-            // { q: "Votre question", a: "Votre réponse", source: "La loi" },
         ];
 
         // ================= 3. LOGIQUE D'AFFICHAGE (Navigation et Injection) =================
