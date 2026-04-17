@@ -141,7 +141,7 @@
     <header>
         <h1 onclick="showPage('home')">L'Édition Juridique</h1>
         <div class="author">Veille juridique et simulateur de droits • Dirigé par <strong>Sana.M</strong></div>
-        <div class="update-badge">Dernière mise à jour hebdomadaire : 17 Avril 2026</div>
+        <div class="update-badge">Dernière mise à jour : 17 Avril 2026</div>
     </header>
 
     <!-- ================= PAGE D'ACCUEIL ================= -->
@@ -149,7 +149,7 @@
         
         <!-- Colonne Gauche : À la Une -->
         <main>
-            <h2 class="section-title">📰 À la Une cette semaine</h2>
+            <h2 class="section-title">📰 À la Une aujourd'hui</h2>
             <div id="featured-news" class="card">
                 <!-- L'actualité principale sera injectée ici par JS -->
             </div>
@@ -189,7 +189,7 @@
 
         <!-- Bas de page : Quiz Dynamique -->
         <section class="quiz-section">
-            <h2 class="section-title">🎯 Quiz Juridique (Tirage aléatoire sur 100 questions)</h2>
+            <h2 class="section-title">🎯 Quiz Juridique (Tirage aléatoire)</h2>
             <div id="quiz-container" class="quiz-grid">
                 <!-- Les questions seront injectées ici par JS -->
             </div>
@@ -198,7 +198,8 @@
     </div>
 
     <!-- ================= PAGE ACTUALITÉS (15 News) ================= -->
-    <div id="news-page" class="page-section container" style="display: block; grid-template-columns: 1fr;">
+    <!-- CORRECTION ICI : Suppression du "display: block;" en ligne qui bloquait l'affichage -->
+    <div id="news-page" class="page-section container" style="grid-template-columns: 1fr;">
         <button class="btn-link" style="width: auto; margin-bottom: 20px;" onclick="showPage('home')">⬅ Retour à l'accueil</button>
         <h2 class="section-title">📰 Fil d'Actualité Juridique et Social (Avril 2026)</h2>
         <div id="all-news-container" class="news-grid">
@@ -207,23 +208,23 @@
     </div>
 
     <script>
-        // ================= 1. BASE DE DONNÉES ACTUALITÉS (15 News) =================
+        // ================= 1. BASE DE DONNÉES ACTUALITÉS (15 News Très Récentes) =================
         const newsData = [
-            { date: "16/04/2026", tag: "Droit du Travail", title: "Congé menstruel institutionnalisé", content: "Le congé menstruel de 2 jours par mois est officiellement inscrit dans le Code du travail pour les entreprises de plus de 50 salariés, sur simple présentation d'un certificat médical annuel." },
-            { date: "14/04/2026", tag: "Numérique", title: "Majorité numérique stricte à 15 ans", content: "L'accès aux réseaux sociaux est désormais techniquement bloqué aux moins de 15 ans sans accord parental certifié via l'application France Identité." },
-            { date: "10/04/2026", tag: "Logement", title: "Passoires thermiques : Sanctions renforcées", content: "L'interdiction de louer des logements classés G est désormais assortie d'amendes automatiques pour les bailleurs, avec possibilité pour le locataire de consigner son loyer." },
-            { date: "07/04/2026", tag: "Famille", title: "Pensions alimentaires : Gestion 100% CAF", content: "L'Agence de recouvrement et d'intermédiation des pensions alimentaires (ARIPA) gère désormais par défaut la totalité des versements dès le prononcé du divorce, annulant le risque d'impayés." },
-            { date: "04/04/2026", tag: "Consommation", title: "L'Indice de Durabilité remplace la Réparabilité", content: "Tous les appareils électroniques et électroménagers doivent désormais afficher un indice de durabilité sur 10, incluant la robustesse et la disponibilité des pièces sur 10 ans." },
-            { date: "31/03/2026", tag: "Droit Étudiant", title: "Réforme des Bourses CROUS : Nouveaux échelons", content: "La réforme tant attendue entre en vigueur. Les plafonds de ressources pour accéder à l'échelon 1 ont été rehaussés de 6%, permettant à 50 000 étudiants supplémentaires de devenir boursiers." },
-            { date: "28/03/2026", tag: "Droit du Travail", title: "Semaine de 4 jours : Le bilan après 1 an", content: "L'expérimentation de la semaine de 4 jours (en 32h ou 35h) dans la fonction publique montre une baisse de 15% de l'absentéisme. Le gouvernement envisage une loi d'incitation pour le privé." },
-            { date: "24/03/2026", tag: "Handicap", title: "La RQTH attribuée à vie par défaut", content: "Pour les handicaps irréversibles, le renouvellement de la Reconnaissance de la Qualité de Travailleur Handicapé n'est plus nécessaire. Une avancée majeure contre la lourdeur administrative." },
-            { date: "20/03/2026", tag: "Logement", title: "Encadrement des loyers étendu", content: "12 nouvelles métropoles adoptent l'encadrement des loyers ce mois-ci. Les locataires peuvent désormais exiger un remboursement rétroactif en cas de dépassement abusif." },
-            { date: "17/03/2026", tag: "Numérique", title: "IA Act : Premières sanctions européennes", content: "Le règlement européen sur l'Intelligence Artificielle fait ses premières victimes : une entreprise a été sanctionnée pour avoir utilisé un algorithme de recrutement discriminatoire." },
-            { date: "14/03/2026", tag: "Droit de la Famille", title: "Le Congé de Naissance remplace le Congé Parental", content: "Mieux rémunéré (jusqu'à 1900€/mois) mais plus court (6 mois), ce nouveau congé vise à inciter les pères à s'impliquer davantage dès la naissance." },
-            { date: "10/03/2026", tag: "Social", title: "RSA : Les 15h d'activité généralisées", content: "Depuis le 1er mars, tous les départements appliquent la condition des 15h d'activité d'insertion pour le versement du RSA, suscitant des débats juridiques sur la notion de 'travail gratuit'." },
-            { date: "07/03/2026", tag: "Consommation", title: "Fin des frais de résiliation anticipée", content: "Une nouvelle directive interdit aux opérateurs téléphoniques et fournisseurs d'énergie de facturer des frais si le client déménage ou change de situation financière." },
-            { date: "03/03/2026", tag: "Santé", title: "Remboursement des psychologues", content: "Le dispositif 'MonSoutienPsy' évolue : l'accès direct sans passer par un médecin généraliste est désormais inscrit dans la loi de financement de la sécurité sociale." },
-            { date: "28/02/2026", tag: "Droit Pénal", title: "Cyberharcèlement : Peines durcies", content: "La nouvelle loi 'Internet Sûr' qualifie désormais les raids numériques de circonstance aggravante systématique, avec des peines allant jusqu'à 5 ans de prison." }
+            { date: "17/04/2026", tag: "Droit du Travail", title: "Le congé menstruel définitivement adopté", content: "L'Assemblée a voté ce matin l'inscription du congé menstruel (2 jours/mois) dans le Code du travail pour toutes les entreprises, sur simple présentation d'un certificat médical annuel." },
+            { date: "16/04/2026", tag: "Numérique", title: "Majorité numérique stricte à 15 ans", content: "Depuis hier, l'accès aux réseaux sociaux est techniquement bloqué aux moins de 15 ans sans accord parental certifié via l'application gouvernementale France Identité." },
+            { date: "15/04/2026", tag: "Logement", title: "Passoires thermiques : Premières amendes", content: "L'interdiction de louer des logements classés G est désormais assortie d'amendes automatiques pour les bailleurs récalcitrants, avec possibilité pour le locataire de consigner son loyer." },
+            { date: "14/04/2026", tag: "Famille", title: "Pensions alimentaires : Gestion 100% CAF", content: "L'ARIPA gère désormais par défaut la totalité des versements dès le prononcé du divorce ou de la séparation, annulant de fait le risque d'impayés pour les parents isolés." },
+            { date: "13/04/2026", tag: "Consommation", title: "L'Indice de Durabilité remplace la Réparabilité", content: "Tous les appareils électroniques vendus en France doivent désormais afficher un indice de durabilité sur 10, incluant la robustesse et la disponibilité des pièces sur 10 ans." },
+            { date: "10/04/2026", tag: "Droit Étudiant", title: "Réforme des Bourses CROUS : Nouveaux échelons", content: "Les plafonds de ressources pour accéder à l'échelon 1 ont été rehaussés de 6%, permettant à 50 000 étudiants supplémentaires de devenir boursiers dès la rentrée prochaine." },
+            { date: "09/04/2026", tag: "Droit du Travail", title: "Semaine de 4 jours : Le bilan après 1 an", content: "L'expérimentation de la semaine de 4 jours (en 32h ou 35h) dans la fonction publique montre une baisse de 15% de l'absentéisme. Le gouvernement envisage une loi d'incitation pour le privé." },
+            { date: "08/04/2026", tag: "Handicap", title: "La RQTH attribuée à vie par défaut", content: "Pour les handicaps irréversibles, le renouvellement de la Reconnaissance de la Qualité de Travailleur Handicapé n'est plus nécessaire. Une avancée majeure contre la lourdeur administrative." },
+            { date: "07/04/2026", tag: "Logement", title: "Encadrement des loyers étendu", content: "12 nouvelles métropoles adoptent l'encadrement des loyers ce mois-ci. Les locataires peuvent désormais exiger un remboursement rétroactif simplifié en cas de dépassement abusif." },
+            { date: "06/04/2026", tag: "Numérique", title: "IA Act : Premières sanctions européennes", content: "Le règlement européen sur l'Intelligence Artificielle fait ses premières victimes : une entreprise a été lourdement sanctionnée pour avoir utilisé un algorithme de recrutement discriminatoire." },
+            { date: "03/04/2026", tag: "Droit de la Famille", title: "Le Congé de Naissance remplace le Congé Parental", content: "Mieux rémunéré (jusqu'à 1900€/mois) mais plus court (6 mois), ce nouveau congé vise à inciter les pères à s'impliquer davantage dès la naissance de l'enfant." },
+            { date: "02/04/2026", tag: "Social", title: "RSA : Les 15h d'activité généralisées", content: "Tous les départements appliquent désormais la condition des 15h d'activité d'insertion pour le versement du RSA, suscitant des débats juridiques sur la notion de 'travail gratuit'." },
+            { date: "01/04/2026", tag: "Consommation", title: "Fin des frais de résiliation anticipée", content: "Une nouvelle directive interdit aux opérateurs téléphoniques et fournisseurs d'énergie de facturer des frais si le client déménage ou change de situation financière." },
+            { date: "30/03/2026", tag: "Santé", title: "Remboursement des psychologues", content: "Le dispositif 'MonSoutienPsy' évolue : l'accès direct sans passer par un médecin généraliste est désormais inscrit dans la loi de financement de la sécurité sociale." },
+            { date: "27/03/2026", tag: "Droit Pénal", title: "Cyberharcèlement : Peines durcies", content: "La nouvelle loi 'Internet Sûr' qualifie désormais les raids numériques de circonstance aggravante systématique, avec des peines allant jusqu'à 5 ans de prison ferme." }
         ];
 
         // ================= 2. BASE DE DONNÉES QUIZ (Modèle pour 100 questions) =================
@@ -244,9 +245,12 @@
 
         // ================= 3. LOGIQUE D'AFFICHAGE (Navigation et Injection) =================
         function showPage(pageId) {
+            // Cache toutes les sections
             document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
+            // Affiche la section demandée
             document.getElementById(pageId).classList.add('active');
-            window.scrollTo(0, 0); // Remonte en haut de la page
+            // Remonte en haut de la page
+            window.scrollTo(0, 0); 
         }
 
         function initNews() {
@@ -309,8 +313,8 @@
 
             // Logique Étudiant (Bourse)
             if (statut === "oui") {
-                if (revenus < 35000 / 12) { // Estimation simplifiée du plafond CROUS
-                    aides.push("🎓 <strong>Bourse CROUS :</strong> Au vu des revenus déclarés, vous êtes probablement éligible à une bourse sur critères sociaux (Échelons 0bis à 7). Pensez à faire votre DSE (Dossier Social Étudiant).");
+                if (revenus < 35000 / 12) {
+                    aides.push("🎓 <strong>Bourse CROUS :</strong> Au vu des revenus déclarés, vous êtes probablement éligible à une bourse sur critères sociaux (Échelons 0bis à 7). Pensez à faire votre DSE.");
                     aides.push("🍽️ <strong>Avantage Étudiant :</strong> Vous avez droit aux repas à 1€ au resto U si vous êtes boursier.");
                 } else {
                     aides.push("🎓 <strong>Bourse CROUS :</strong> Les revenus de votre foyer semblent dépasser les plafonds. Cependant, vous gardez accès aux aides au logement (APL).");
@@ -326,7 +330,7 @@
                 }
             }
 
-            // Logique Aides Générales (RSA / Prime d'activité) - Ne s'applique pas aux étudiants classiques sans revenus
+            // Logique Aides Générales (RSA / Prime d'activité)
             if (statut === "non") {
                 if (age >= 25 || (age >= 18 && revenus > 0)) {
                     if (revenus === 0 && age >= 25) {
@@ -360,8 +364,6 @@
         window.onload = function() {
             initNews();
             chargerQuiz();
-            // Cache la page des news au démarrage
-            document.getElementById('news-page').classList.remove('active');
         };
     </script>
 </body>
