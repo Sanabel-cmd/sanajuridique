@@ -14,7 +14,6 @@
             --success-green: #16a34a;
         }
         
-        /* Ajout du défilement fluide pour toute la page */
         html {
             scroll-behavior: smooth;
         }
@@ -69,7 +68,6 @@
             gap: 50px;
         }
 
-        /* Conteneur pleine largeur pour les actualités et le quiz */
         .full-width-container {
             max-width: 1500px;
             width: 95%;
@@ -121,7 +119,6 @@
         }
         .btn-link:hover { background-color: var(--navy-blue); color: white; }
 
-        /* Formulaire */
         label { font-weight: 600; display: block; margin-top: 15px; margin-bottom: 5px; }
         input, select, button { width: 100%; padding: 12px; box-sizing: border-box; border: 1px solid var(--border-color); font-family: 'Inter', sans-serif; font-size: 1rem; }
         button.btn-primary { background-color: var(--navy-blue); color: white; font-weight: bold; cursor: pointer; border: none; margin-top: 20px; transition: 0.3s; }
@@ -129,7 +126,6 @@
         
         #result-calc { padding: 20px; background-color: #e8f0fe; border-left: 5px solid var(--navy-blue); display: none; margin-top: 20px; }
 
-        /* Grilles */
         .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 30px; }
         .quiz-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; }
         .quiz-answer { display: none; padding: 15px; background-color: #f0fdf4; border-left: 4px solid var(--success-green); margin-top: 15px; font-size: 0.95rem; }
@@ -151,20 +147,13 @@
         <div class="update-badge">Dernière mise à jour : 17 Avril 2026</div>
     </header>
 
-    <!-- ================= HAUT DE PAGE ================= -->
     <div class="container">
-        
-        <!-- Colonne Gauche : À la Une -->
         <main>
             <h2 class="section-title">📰 À la Une aujourd'hui</h2>
-            <div id="featured-news" class="card">
-                <!-- L'actualité principale sera injectée ici par JS -->
-            </div>
-            <!-- Le bouton fait désormais défiler la page vers la section des actualités -->
+            <div id="featured-news" class="card"></div>
             <button class="btn-link" onclick="document.getElementById('all-news-section').scrollIntoView();">Voir les actualités récentes</button>
         </main>
 
-        <!-- Colonne Droite : Calculateur -->
         <aside>
             <h2 class="section-title">Calculateur Universel</h2>
             <div class="card">
@@ -196,25 +185,18 @@
         </aside>
     </div>
 
-    <!-- ================= SECTION ACTUALITÉS ================= -->
     <div id="all-news-section" class="full-width-container">
         <h2 class="section-title">📰 Fil d'Actualité Juridique et Social (Avril 2026)</h2>
-        <div id="all-news-container" class="news-grid">
-            <!-- Les actualités seront injectées ici -->
-        </div>
+        <div id="all-news-container" class="news-grid"></div>
     </div>
 
-    <!-- ================= SECTION QUIZ ================= -->
     <div class="full-width-container" style="margin-bottom: 60px;">
         <h2 class="section-title">Quiz Juridique (Tirage aléatoire)</h2>
-        <div id="quiz-container" class="quiz-grid">
-            <!-- Les questions seront injectées ici par JS -->
-        </div>
+        <div id="quiz-container" class="quiz-grid"></div>
         <button class="btn-link" style="margin-top: 20px;" onclick="chargerQuiz()">Générer de nouvelles questions</button>
     </div>
 
     <script>
-        // ================= 1. BASE DE DONNÉES ACTUALITÉS =================
         const newsData = [
             { date: "17/04/2026", tag: "Droit du Travail", title: "Le congé menstruel définitivement adopté", content: "L'Assemblée a voté ce matin l'inscription du congé menstruel (2 jours/mois) dans le Code du travail pour toutes les entreprises, sur simple présentation d'un certificat médical annuel." },
             { date: "16/04/2026", tag: "Numérique", title: "Majorité numérique stricte à 15 ans", content: "Depuis hier, l'accès aux réseaux sociaux est techniquement bloqué aux moins de 15 ans sans accord parental certifié via l'application gouvernementale France Identité." },
@@ -233,7 +215,6 @@
             { date: "27/03/2026", tag: "Droit Pénal", title: "Cyberharcèlement : Peines durcies", content: "La nouvelle loi 'Internet Sûr' qualifie désormais les raids numériques de circonstance aggravante systématique, avec des peines allant jusqu'à 5 ans de prison ferme." }
         ];
 
-        // ================= 2. BASE DE DONNÉES QUIZ =================
         const quizData = [
             { q: "Logement : Mon propriétaire a 3 mois pour me rendre ma caution.", a: "Faux. Le délai est de 1 mois si l'état des lieux est conforme, 2 mois sinon.", source: "Loi du 6 juillet 1989" },
             { q: "Travail : J'ai le droit d'ignorer les emails de mon patron le dimanche.", a: "Vrai. C'est le droit à la déconnexion.", source: "Art. L2242-17 du Code du travail" },
@@ -249,7 +230,6 @@
             { q: "Logement : Le propriétaire peut entrer chez moi s'il a gardé un double des clés.", a: "Faux. C'est une violation de domicile, punie par la loi.", source: "Art. 226-4 du Code pénal" }
         ];
 
-        // ================= 3. LOGIQUE D'AFFICHAGE =================
         function initNews() {
             const featured = newsData[0];
             document.getElementById('featured-news').innerHTML = `
@@ -289,7 +269,6 @@
             rep.style.display = rep.style.display === "block" ? "none" : "block";
         }
 
-        // ================= 4. CALCULATEUR =================
         function calculerAides() {
             const age = parseInt(document.getElementById('age').value);
             const statut = document.getElementById('statut').value;
