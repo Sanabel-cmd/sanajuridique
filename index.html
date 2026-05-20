@@ -144,12 +144,12 @@
     <header>
         <h1>L'Édition Juridique</h1>
         <div class="author">Veille juridique et simulateur de droits • Dirigé par <strong>Sana.M</strong></div>
-        <div class="update-badge">Dernière mise à jour : 9 Mai 2026</div>
+        <div class="update-badge">Dernière mise à jour : 20 Mai 2026</div>
     </header>
 
     <div class="container">
         <main>
-            <h2 class="section-title">📰 À la Une aujourd'hui</h2>
+            <h2 class="section-title">À la Une aujourd'hui</h2>
             <div id="featured-news" class="card"></div>
             <button class="btn-link" onclick="document.getElementById('all-news-section').scrollIntoView();">Voir les actualités récentes</button>
         </main>
@@ -186,7 +186,7 @@
     </div>
 
     <div id="all-news-section" class="full-width-container">
-        <h2 class="section-title">📰 Fil d'Actualité Juridique et Social (Mai 2026)</h2>
+        <h2 class="section-title">Fil d'Actualité Juridique et Social (Mai 2026)</h2>
         <div id="all-news-container" class="news-grid"></div>
     </div>
 
@@ -198,6 +198,8 @@
 
     <script>
         const newsData = [
+            { date: "18/05/2026", tag: "Environnement", title: "Extension de l'interdiction des vols courts", content: "L'interdiction des vols intérieurs en cas d'alternative ferroviaire de moins de 4h entre en vigueur aujourd'hui, remplaçant la précédente limite de 2h30." },
+            { date: "15/05/2026", tag: "Droit du Travail", title: "Télétravail garanti pour les proches aidants", content: "Un nouveau décret impose aux entreprises d'accorder jusqu'à 3 jours de télétravail par semaine aux salariés reconnus comme proches aidants, sans possibilité de refus non justifié." },
             { date: "09/05/2026", tag: "Droit Pénal", title: "Nouvelle procédure pour les crimes reconnus", content: "Le projet de loi sur la justice criminelle introduit la PJCR (Procédure de Jugement des Crimes Reconnus). Elle permet de juger plus rapidement certains crimes lorsque les faits sont admis par l'accusé, désengorgeant ainsi les cours d'assises." },
             { date: "05/05/2026", tag: "Logement", title: "Évolution du calcul du DPE", content: "Le mode de calcul du Diagnostic de Performance Énergétique (DPE) a été modifié. Il pénalise désormais moins les petits logements équipés d'un chauffage électrique, permettant à de nombreux biens de sortir du statut de 'passoire thermique'." },
             { date: "02/05/2026", tag: "Fiscalité", title: "Gel du barème de l'impôt sur le revenu", content: "Contrairement aux années précédentes, le barème de l'impôt sur le revenu n'a pas été revalorisé pour compenser l'inflation en 2026. Une mesure qui impacte mécaniquement le seuil d'imposition de nombreux foyers." },
@@ -339,3 +341,4 @@
     </script>
 </body>
 </html>
+
